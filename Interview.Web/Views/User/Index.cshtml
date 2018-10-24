@@ -1,0 +1,42 @@
+﻿@using System.Web.Mvc.Html
+@inherits System.Web.Mvc.WebViewPage<Interview.Web.Model.UserListModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users</h2>
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+<div class="user-table">
+    <form action="\User\Create" method="POST">
+        <table>
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Username</td>
+                    <td>First name</td>
+                    <td>Last name</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Username</td>
+                        <td>@user.Firstname</td>
+                        <td>@user.Lastname</td>
+                    </tr>
+                }
+
+                <tr>
+                    <td><button type="submit" name="action" value="Add" class="btn btn-primary"/>Add</td>
+                    <td>
+                        @Html.TextBox("UserName", Model.CreatingUser?.Username)</td>
+                    <td>@Html.TextBox("FirstName", Model.CreatingUser?.Firstname)</td>
+                    <td>@Html.TextBox("LastName", Model.CreatingUser?.Lastname)</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
